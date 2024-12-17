@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from core.models import Document
+from core.models import Document, Workflow
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,4 +11,9 @@ class DocumentSerializer(serializers.ModelSerializer):
     uploaded_by = serializers.ReadOnlyField(source='uploaded_by.username')
     class Meta:
         model = Document
-        fields = ['id', 'title', 'document_type', 'file', 'status', 'uploaded_by', 'uploaded_at', 'updated_at']
+        fields = '__all__'
+
+class WorkflowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Workflow
+        fields = '__all__'

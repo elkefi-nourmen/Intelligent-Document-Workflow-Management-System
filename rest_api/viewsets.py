@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, BasePermission
 from django.contrib.auth.models import User
-from core.models import Document
-from .serializers import UserSerializer, DocumentSerializer
+from core.models import Document, Workflow
+from .serializers import UserSerializer, DocumentSerializer, WorkflowSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -28,3 +28,7 @@ class DocumentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         # Automatically assign the logged-in user as the creator of the document
         serializer.save(uploaded_by=self.request.user)
+
+class WorkflowViewSet(viewsets.ModelViewSet):
+    queryset = Workflow.objects.all()
+    serializer_class = WorkflowSerializer
