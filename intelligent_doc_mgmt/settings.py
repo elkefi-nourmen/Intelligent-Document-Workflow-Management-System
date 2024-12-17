@@ -75,6 +75,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'intelligent_doc_mgmt.wsgi.application'
 
 
+GRAPHENE = {
+    'SCHEMA': 'graphql_api.schema.schema'  # Path to the schema
+}
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
