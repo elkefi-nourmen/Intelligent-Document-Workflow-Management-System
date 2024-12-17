@@ -3,6 +3,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser, BasePermiss
 from django.contrib.auth.models import User
 from core.models import Document, Workflow
 from .serializers import UserSerializer, DocumentSerializer, WorkflowSerializer
+from .cloud_service import upload_to_nextcloud
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -27,8 +28,22 @@ class DocumentViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         # Automatically assign the logged-in user as the creator of the document
-        serializer.save(uploaded_by=self.request.user)
+        instance = serializer.save(uploaded_by=self.request.user)
+
+        username = 'chroud.wejdene@gmail.com'
+        password = 'Wej2003...'
+        directory = '/Documents/'
+
+        file_path = instance.file.path
+        file_name = instance.file.name.split('/')[-1]
+
+        result = upload_to_nextcloud(file_path, file_name, username, password, directory)
+
+        if not result['success']:
+            instance.status = 'failed'
+            instance.save()
 
 class WorkflowViewSet(viewsets.ModelViewSet):
     queryset = Workflow.objects.all()
     serializer_class = WorkflowSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
