@@ -42,6 +42,7 @@ class DocumentViewSet(viewsets.ModelViewSet):
         if not result['success']:
             instance.status = 'failed'
             instance.save()
+            return
 
 class WorkflowViewSet(viewsets.ModelViewSet):
     queryset = Workflow.objects.all()

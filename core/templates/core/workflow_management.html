@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h1>Workflow Management</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Document</th>
+            <th>Assigned To</th>
+            <th>Current Step</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for workflow in workflows %}
+        <tr>
+            <td>{{ workflow.document.title }}</td>
+            <td>{{ workflow.assigned_to.username }}</td>
+            <td>{{ workflow.current_step }}</td>
+            <td>{{ workflow.status }}</td>
+            <td>
+                <a href="#" class="btn btn-sm btn-primary">Edit</a>
+                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

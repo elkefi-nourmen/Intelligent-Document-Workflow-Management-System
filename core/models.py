@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.forms import ValidationError
 
 # Document Model
 class Document(models.Model):
@@ -24,3 +25,8 @@ class Workflow(models.Model):
     status = models.CharField(max_length=50, default='In Progress')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+    def clean(self):
+        if self.assigned_to.groups.filter(name='Employee').exists() is False:
+            raise ValidationError("Assigned user must be an employee.")

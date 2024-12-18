@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h1>Admin Dashboard</h1>
+<div class="alert alert-info">Welcome, {{ user.username }}! You are an administrator.</div>
+<ul class="list-group">
+    <li class="list-group-item"><a href="{% url 'user_management' %}">Manage Users</a></li>
+    <li class="list-group-item"><a href="{% url 'workflow_management' %}">Manage Workflows</a></li>
+</ul>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Add New Workflow</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Create Workflow</h4>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{% url 'add_workflow' %}">
+                {% csrf_token %}
+
+                <!-- Select Document -->
+                <div class="form-group mb-3">
+                    <label for="document_id">Select Document</label>
+                    <select name="document_id" id="document_id" class="form-control" required>
+                        <option value="" disabled selected>-- Choose Document --</option>
+                        {% for document in documents %}
+                            <option value="{{ document.id }}">{{ document.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Select Assigned User -->
+                <div class="form-group mb-3">
+                    <label for="assigned_to_id">Assign to User</label>
+                    <select name="assigned_to_id" id="assigned_to_id" class="form-control" required>
+                        <option value="" disabled selected>-- Choose User --</option>
+                        {% for user in users %}
+                            <option value="{{ user.id }}">{{ user.username }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Set Workflow Status -->
+                <div class="form-group mb-3">
+                    <label for="status">Workflow Status</label>
+                    <select name="status" id="status" class="form-control" required>
+                        <option value="pending">Pending</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">Create Workflow</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

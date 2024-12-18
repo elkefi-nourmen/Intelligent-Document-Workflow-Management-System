@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h1>Team Documents</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Uploaded By</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for doc in documents %}
+        <tr>
+            <td>{{ doc.title }}</td>
+            <td>{{ doc.document_type }}</td>
+            <td>{{ doc.status }}</td>
+            <td>{{ doc.uploaded_by }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

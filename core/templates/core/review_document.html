@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Review Document</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Document Details</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Title:</strong> {{ document.title }}</p>
+            <p><strong>Uploaded By:</strong> {{ document.uploaded_by.username }}</p>
+            <p><strong>Type:</strong> {{ document.document_type }}</p>
+            <p><strong>Uploaded At:</strong> {{ document.uploaded_at }}</p>
+            <p>
+                <strong>Document Link:</strong>
+                <a href="{{ document.file.url }}" class="btn btn-outline-info" target="_blank">
+                    View Document
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Approval Form -->
+    <form method="POST" class="mt-4">
+        {% csrf_token %}
+        <button type="submit" name="action" value="approve" class="btn btn-success">
+            Approve
+        </button>
+        <button type="submit" name="action" value="reject" class="btn btn-danger">
+            Reject
+        </button>
+    </form>
+</div>
+{% endblock %}

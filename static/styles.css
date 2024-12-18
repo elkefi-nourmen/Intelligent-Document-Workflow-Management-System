@@ -1,0 +1,20 @@
+/* Ensure the html and body occupy the full height */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Main content should flex to take up available space */
+main {
+    flex: 1; /* This ensures the main content grows and pushes the footer down */
+}
+
+/* Footer styling */
+footer {
+    background-color: #343a40; /* Match the Bootstrap bg-dark color */
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+}
