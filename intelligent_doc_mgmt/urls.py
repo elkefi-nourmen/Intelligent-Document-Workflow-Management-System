@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('graphql/', GraphQLView.as_view(graphiql=True)),
     path('rest/', include('rest_api.urls')),
+    path('soap/', include('soap_api.urls')),
 ]
