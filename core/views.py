@@ -250,6 +250,37 @@ def user_management(request):
     users = User.objects.all()
     return render(request, 'core/user_management.html', {'users': users})
 
+
+# edit user View
+@login_required
+@admin_required
+def edit_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+
+    if request.method == 'POST':
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        user.email = request.POST.get('email')
+        user.save()
+        messages.success(request, f"User {user.username}'s details updated successfully!")
+        return redirect('user_management')
+
+    return render(request, 'core/edit_user.html', {'user': user})
+
+
+# delete user View
+@login_required
+@admin_required
+def delete_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    if request.method == 'POST':
+        user.delete()
+        messages.success(request, f"User {user.username} deleted successfully!")
+        return redirect('user_management')
+
+    return render(request, 'core/confirm_delete_user.html', {'user': user})
+
+
 # workflow management View
 @login_required
 @admin_required

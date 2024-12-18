@@ -19,8 +19,8 @@
             <td>{{ user.first_name }}</td>
             <td>{{ user.last_name }}</td>
             <td>
-                <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                <a href="{% url 'edit_user' user.id %}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{% url 'delete_user' user.id %}" class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>
         {% endfor %}
