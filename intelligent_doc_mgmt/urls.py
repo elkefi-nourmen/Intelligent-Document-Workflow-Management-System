@@ -16,11 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from graphene_django.views import GraphQLView # type: ignore
+from graphene_django.views import GraphQLView 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('graphql/', GraphQLView.as_view(graphiql=True)),
     path('rest/', include('rest_api.urls')),
-    path('', include('core.urls')),
+    path('soap/', include('soap_api.urls')),
 ]
