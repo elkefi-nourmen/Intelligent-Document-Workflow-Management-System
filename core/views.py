@@ -287,3 +287,41 @@ def delete_user(request, user_id):
 def workflow_management(request):
     workflows = Workflow.objects.select_related('document', 'assigned_to').all()
     return render(request, 'core/workflow_management.html', {'workflows': workflows})
+
+
+# Admin Document Management View
+@login_required
+@admin_required
+def admin_document_management(request):
+    documents = Document.objects.all()
+
+    if request.method == 'POST':
+        # Handle Document Upload
+        title = request.POST.get('title')
+        document_type = request.POST.get('document_type')
+        file = request.FILES.get('file')
+
+        if not title or not document_type or not file:
+            messages.error(request, "All fields are required!")
+        else:
+            Document.objects.create(
+                title=title,
+                document_type=document_type,
+                file=file,
+                uploaded_by=request.user
+            )
+            messages.success(request, "Document uploaded successfully!")
+
+        return redirect('admin_document_management')
+
+    return render(request, 'core/admin_document_management.html', {'documents': documents})
+
+
+# Admin Document Delete View
+@login_required
+@admin_required
+def delete_document(request, document_id):
+    document = get_object_or_404(Document, id=document_id)
+    document.delete()
+    messages.success(request, f"Document '{document.title}' deleted successfully!")
+    return redirect('admin_document_management')

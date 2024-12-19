@@ -14,11 +14,15 @@ urlpatterns = [
     path('manager_dashboard/', views.manager_dashboard, name='manager_dashboard'),
     path('employee_dashboard/', views.employee_dashboard, name='employee_dashboard'),
 
+    #admin
     path('user_management/', views.user_management, name='user_management'),
     path('user_management/edit/<int:user_id>/', views.edit_user, name='edit_user'),
     path('user_management/delete/<int:user_id>/', views.delete_user, name='delete_user'),
     path('workflow_management/', views.workflow_management, name='workflow_management'),
-
+    path('admin_document_management/', views.admin_document_management, name='admin_document_management'),
+    path('admin_document_management/delete/<int:document_id>/', views.delete_document, name='delete_document'),
+    
+    #manager
     path('team_documents/', views.team_documents, name='team_documents'),
     path('document_analytics/', views.document_analytics, name='document_analytics'),
     path('review_document/<int:doc_id>/', views.review_document, name='review_document'),

@@ -1,9 +1,37 @@
 {% extends 'core/base.html' %}
+
 {% block content %}
-<h1>Admin Dashboard</h1>
-<div class="alert alert-info">Welcome, {{ user.username }}! You are an administrator.</div>
-<ul class="list-group">
-    <li class="list-group-item"><a href="{% url 'user_management' %}">Manage Users</a></li>
-    <li class="list-group-item"><a href="{% url 'workflow_management' %}">Manage Workflows</a></li>
-</ul>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Admin Dashboard</h1>
+
+    <div class="alert alert-info text-center">
+        Welcome, <strong>{{ user.username }}</strong>! You are an administrator.
+    </div>
+
+    <!-- Dashboard Options -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Admin Tools</h4>
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a href="{% url 'user_management' %}" class="btn btn-outline-primary w-100">
+                        👤 Manage Users
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'workflow_management' %}" class="btn btn-outline-success w-100">
+                        🔄 Manage Workflows
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'admin_document_management' %}" class="btn btn-outline-warning w-100">
+                        📂 Manage Documents
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}
