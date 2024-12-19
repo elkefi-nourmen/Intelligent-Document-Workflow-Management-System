@@ -45,7 +45,7 @@ def signup_view(request):
 
         # Create the new user and assign to 'Employee' group
         user = User.objects.create_user(username=username, email=email, password=password1)
-        employee_group = Group.objects.get(name='Employee')  # Ensure group exists
+        employee_group = Group.objects.get(name='Employee')
         user.groups.add(employee_group)
         user.save()
 

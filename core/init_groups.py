@@ -15,13 +15,13 @@ def create_groups():
 
     # Assign permissions to the Manager group
     manager_permissions = Permission.objects.filter(
-        codename__in=['view_user', 'change_user', 'view_document', 'change_document']
+        codename__in=['view_user', 'view_document', 'change_document','view_workflow', 'add_workflow', 'change_workflow', 'delete_workflow']
     )
     manager_group.permissions.set(manager_permissions)
 
     # Assign permissions to the Employee group
     employee_permissions = Permission.objects.filter(
-        codename__in=['view_document', 'add_document']
+        codename__in=['view_document', 'add_document', 'change_document', 'delete_document']
     )
     employee_group.permissions.set(employee_permissions)
 
